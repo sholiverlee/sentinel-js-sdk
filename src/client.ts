@@ -1,12 +1,12 @@
 import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
-import { StargateClient, StargateClientOptions } from "@cosmjs/stargate"
+import { HttpEndpoint, StargateClient, StargateClientOptions } from "@cosmjs/stargate"
 import { buildSentinelQueryClient, SentinelQueryClient } from "./modules/queries"
 
 export class SentinelClient extends StargateClient {
     public readonly sentinelQuery: SentinelQueryClient | undefined
 
     public static override async connect(
-        endpoint: string,
+        endpoint: string | HttpEndpoint,
         options?: StargateClientOptions,
     ): Promise<SentinelClient> {
         const tmClient = await Tendermint34Client.connect(endpoint)
